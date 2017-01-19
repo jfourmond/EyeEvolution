@@ -8,7 +8,7 @@ import writer_and_reader.RefractionIndexReader;
 public class Eye {
 	//	CONSTANTES
 	public static final double W = 1.5;			// Largeur maximale de l'oeil
-	public static final double I = Math.exp(6);	// Intensité lumineuse
+	public static final double I = Math.pow(Math.E, 6);	// Intensité lumineuse
 	
 	public static final RefractionIndexReader rir = new RefractionIndexReader();
 	
@@ -87,6 +87,7 @@ public class Eye {
 	 * @param curveRadius : nouvelle valeur du rayon de courbure
 	 */
 	public void setCurveRadius(double curveRadius) {
+		curveRadius = round(curveRadius);
 		if(curveRadius < MIN_CURVE_RADIUS)
 			this.curveRadius = MIN_CURVE_RADIUS;
 		else if(curveRadius > MAX_CURVE_RADIUS)
@@ -100,6 +101,7 @@ public class Eye {
 	 * @param irisSize : nouvelle valeur de la taille de l'iris
 	 */
 	public void setIrisSize(double irisSize) {
+		irisSize = round(irisSize);
 		if(irisSize < MIN_IRIS_SIZE)
 			this.irisSize = MIN_IRIS_SIZE;
 		else if(irisSize > MAX_IRIS_SIZE)
@@ -113,6 +115,7 @@ public class Eye {
 	 * @param angle : nouvelle valeur de l'angle
 	 */
 	public void setAngle(double angle) {
+		angle = round(angle);
 		if(angle < MIN_ANGLE)
 			this.angle = MIN_ANGLE;
 		else if(angle > MAX_ANGLE)
@@ -126,6 +129,7 @@ public class Eye {
 	 * @param refractionIndex : nouvelle valeur de l'indice de réfraction
 	 */
 	public void setRefractionIndex(double refractionIndex) {
+		refractionIndex = round(refractionIndex);
 		if(refractionIndex < MIN_REFRACTION_INDEX)
 			this.refractionIndex = MIN_REFRACTION_INDEX;
 		else if(refractionIndex > MAX_REFRACTION_INDEX)
@@ -197,12 +201,18 @@ public class Eye {
 	 * Calcule de la fonction de fitness
 	 */
 	public void fitness() {
-		if(refractionIndex == 1.35)
-			fitness = 0.375 * (depth / aperture) * Math.sqrt(Math.log(0.746 * Math.pow(aperture, 2) * Math.sqrt(I)));
-		else if(refractionIndex > 1.35)
+		if(refractionIndex == 1.35) {
+			System.err.println("ICI 1 : " + depth + " " + aperture + " " + I);
+			fitness = Math.log(0.746 * Math.pow(aperture,2) * Math.sqrt(I));
+			// fitness = 0.375 * (depth / aperture) * Math.sqrt(Math.log(0.746 * Math.pow(aperture, 2) * Math.sqrt(I)));
+			System.err.println(fitness);
+		} else if(refractionIndex > 1.35) {
+			System.err.println("ICI 2");
 			fitness = 1 / sightAngle;
-		else
+		} else {
+			System.err.println("ICI 3");
 			fitness = 0;
+		}
 	}
 	
 	/**
@@ -264,6 +274,12 @@ public class Eye {
 		sb.append("Angle : " + angle + "\t");
 		sb.append("Indice de réfraction : " + refractionIndex);
 		return sb.toString();
+	}
+	
+	private double round(double value) {
+		BigDecimal bd = new BigDecimal(value);
+		bd.setScale(3, RoundingMode.HALF_UP);
+		return bd.doubleValue();
 	}
 	
 	//	METHODES DE CLASSE
