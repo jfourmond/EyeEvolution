@@ -8,7 +8,7 @@ import writer_and_reader.RefractionIndexReader;
 
 public class Eye {
 	//	CONSTANTES
-	public static final double W = 1.5;			// Largeur maximale de l'oeil
+	public static final double W = 1.5;					// Largeur maximale de l'oeil
 	public static final double I = Math.pow(Math.E, 6);	// Intensité lumineuse
 	
 	public static final double eps = 0.0001;
@@ -16,25 +16,27 @@ public class Eye {
 	public static final RefractionIndexReader rir = new RefractionIndexReader();
 
 	// CONSTANTES DES PLAGES
+	// Le rayon de courbure peut varier dans la plage [w/2, 10000]
 	public static final double MIN_CURVE_RADIUS = W / 2;
 	public static final double MAX_CURVE_RADIUS = 10000;
-
+	
+	// La taille de l'iris peut varier dans la plage [0, w/2[
 	public static final double MIN_IRIS_SIZE = 0;
 	public static final double MAX_IRIS_SIZE = W / 2;
 
+	// L'angle peut varier dans la plage [0, PI/2[
 	public static final double MIN_ANGLE = 0;
 	public static final double MAX_ANGLE = Math.PI / 2;
 
+	// L'indice de réfraction peut varier dans la plage [1.35, 1.55]
 	public static final double MIN_REFRACTION_INDEX = 1.35;
 	public static final double MAX_REFRACTION_INDEX = 1.55;
 
 	// ATTRIBUTS
-	private double curveRadius; // Rayon de courbure dans la plage [ w/2, 10000
-								// ]
-	private double irisSize; // Taille de l'iris dans la plage [ 0, w/2 ]
-	private double angle; // Angle dans la plage [ 0, pi/2 ]
-	private double refractionIndex; // Indice de réfraction dans la plage [
-									// 1.35, 1.55 ]
+	private double curveRadius; // Rayon de courbure dans la plage [w/2, 10000]
+	private double irisSize; // Taille de l'iris dans la plage [0, w/2[
+	private double angle; // Angle dans la plage [0, pi/2[
+	private double refractionIndex; // Indice de réfraction dans la plage [1.35, 1.55]
 
 	// ATTRIBUTS CALCULES
 	private double depth;
@@ -105,10 +107,8 @@ public class Eye {
 
 	// SETTERS avec gestion des plages de valeurs
 	/**
-	 * Mise à jour du rayon de courbure dans la plage [ W/2, 10 000 ]
-	 * 
-	 * @param curveRadius
-	 *            : nouvelle valeur du rayon de courbure
+	 * Mise à jour du rayon de courbure dans la plage [W/2, 10 000]
+	 * @param curveRadius : nouvelle valeur du rayon de courbure
 	 */
 	public void setCurveRadius(double curveRadius) {
 		curveRadius = round(curveRadius);
@@ -121,10 +121,8 @@ public class Eye {
 	}
 
 	/**
-	 * Mise à jour de la taille de l'iris dans la plage [ 0, W/2 ]
-	 * 
-	 * @param irisSize
-	 *            : nouvelle valeur de la taille de l'iris
+	 * Mise à jour de la taille de l'iris dans la plage [0, W/2[
+	 * @param irisSize : nouvelle valeur de la taille de l'iris
 	 */
 	public void setIrisSize(double irisSize) {
 		irisSize = round(irisSize);
@@ -137,26 +135,22 @@ public class Eye {
 	}
 
 	/**
-	 * Mise à jour de l'angle dans la plage [ 0, pi / 2 ]
-	 * 
-	 * @param angle
-	 *            : nouvelle valeur de l'angle
+	 * Mise à jour de l'angle dans la plage [0, pi / 2[
+	 * @param angle : nouvelle valeur de l'angle
 	 */
 	public void setAngle(double angle) {
 		angle = round(angle);
 		if(angle < MIN_ANGLE)
 			this.angle = MIN_ANGLE;
 		else if (angle > MAX_ANGLE)
-			this.angle = MAX_ANGLE;
+			this.angle = MAX_ANGLE - eps;
 		else
 			this.angle = angle;
 	}
 
 	/**
-	 * Mise à jour de l'indice de réfraction dans la plage [ 1.35, 1.55 ]
-	 * 
-	 * @param refractionIndex
-	 *            : nouvelle valeur de l'indice de réfraction
+	 * Mise à jour de l'indice de réfraction dans la plage [1.35, 1.55]
+	 * @param refractionIndex : nouvelle valeur de l'indice de réfraction
 	 */
 	public void setRefractionIndex(double refractionIndex) {
 		refractionIndex = round(refractionIndex);
@@ -234,24 +228,18 @@ public class Eye {
 		double res = 0;
 
 		if (getRefractionIndex() == 1.35)
-			res = Math.atan(aperture / 2 * depth);
-
+			res = 2 * Math.atan(aperture / 2 * depth);
 		else if (getRefractionIndex() > 1.35) {
-
-			double term_1 = Math.pow(ratio, 2) * aperture / 2 * depth;
-
+			double term_1 = (Math.pow(ratio, 2) * aperture) / (2 * depth);
 			double term_2 = Math.sqrt(1 + Math.pow(ratio, 2)
-					- (Math.pow(ratio, 2) * Math.pow(aperture, 2) / 4 * Math.pow(depth, 2)));
-
+					- ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2))));
 			double num = term_1 - term_2;
-
 			double denum = 1 + Math.pow(ratio, 2);
-
 			res = 2 * Math.asin(num / denum);
 		}
 		
+		// System.out.println("sightAngle : " + sightAngle);
 		sightAngle = res;
-		//return res;
 	}
 
 	/**
@@ -262,17 +250,16 @@ public class Eye {
 			fitness = 0.375 * (depth / aperture) * Math.sqrt(Math.log(0.746 * Math.pow(aperture, 2) * Math.sqrt(I)));
 		else if(refractionIndex > 1.35)
 			fitness = 1 / sightAngle;
-		else
+		else {
+			System.err.println("PROBLEME FITNESS ?");
 			fitness = 0;
+		}
 	}
 
 	/**
 	 * Calcule la probabilité de reproduction
-	 * 
-	 * @param rank
-	 *            : rank de l'indivu dans la population
-	 * @param n
-	 *            : taille de la population
+	 * @param rank : rank de l'indivu dans la population
+	 * @param n : taille de la population
 	 * @return la probabilité de reproduction
 	 */
 	public double reproductionProbability(int rank, int n, double c) {
@@ -345,13 +332,9 @@ public class Eye {
 	/**
 	 * Retourne des caractéristiques aléatoires en fonction des caractéristiques
 	 * des parents
-	 * 
-	 * @param e1
-	 *            : parent 1
-	 * @param e2
-	 *            : parent 2
-	 * @param crossoverRate
-	 *            : taux de cross-over
+	 * @param e1 : parent 1
+	 * @param e2 : parent 2
+	 * @param crossoverRate : taux de cross-over
 	 * @return des caractéristiques aléatoires en fonction des caractéristiques
 	 *         des parents
 	 */
