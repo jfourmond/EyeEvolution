@@ -11,7 +11,7 @@ public class Eye {
 	public static final double W = 1.5;					// Largeur maximale de l'oeil
 	public static final double I = Math.pow(Math.E, 6);	// Intensité lumineuse
 	
-	public static final double eps = 0.0001;
+	public static final double eps = 0.01;
 	
 	public static final RefractionIndexReader rir = new RefractionIndexReader();
 
@@ -177,6 +177,13 @@ public class Eye {
 		ratio();
 		sightAngle();
 		fitness();
+		
+		System.out.println(this);
+		System.out.print("\tdepth : " + depth);
+		System.out.print("\taperture : " + aperture);
+		System.out.print("\tratio : " + ratio);
+		System.out.print("\tsightAngle : " + sightAngle);
+		System.out.println("\tfitness : " + fitness);
 	}
 
 	/**
@@ -212,30 +219,28 @@ public class Eye {
 	 * Calcule de l'angle de vue
 	 */
 	public void sightAngle() {
-		
-//		if (refractionIndex == 1.35)
-//			sightAngle = 2 * Math.atan(aperture / (2 * depth));
-//		else {
-//			sightAngle = 2 * Math.asin((((Math.pow(ratio, 2) * aperture) / (2 * depth)) - Math.sqrt(
-//					1 + Math.pow(ratio, 2) - ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)))))
-//					/ (1 + Math.pow(ratio, 2)));
-//			
-//			
-//			
-//			System.out.println("sightAngle : " + sightAngle);
-
-		
 		double res = 0;
 
-		if (getRefractionIndex() == 1.35)
+		if (getRefractionIndex() == 1.35) {
 			res = 2 * Math.atan(aperture / 2 * depth);
-		else if (getRefractionIndex() > 1.35) {
+			System.out.println("RES : " + res);
+		} else if (getRefractionIndex() > 1.35) {
 			double term_1 = (Math.pow(ratio, 2) * aperture) / (2 * depth);
-			double term_2 = Math.sqrt(1 + Math.pow(ratio, 2)
-					- ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2))));
+			System.out.println("TERM 1 : " + term_1);
+			double term_2 = Math.sqrt(1 + Math.pow(ratio, 2) - ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2))));
+			System.out.println("TERM 2 : " + term_2);
+				System.out.println(1 + Math.pow(ratio, 2));
+				System.out.println(Math.pow(ratio, 2) * Math.pow(aperture, 2));
+				System.out.println(4 * Math.pow(depth, 2));
+				System.out.println((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)));
+				System.out.println(1 + Math.pow(ratio, 2) - (Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)));
+				System.out.println(Math.sqrt(1 + Math.pow(ratio, 2) - ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)))));
 			double num = term_1 - term_2;
+			System.out.println("NUM : " + num);
 			double denum = 1 + Math.pow(ratio, 2);
+			System.out.println("DENUM : " + denum);
 			res = 2 * Math.asin(num / denum);
+			System.out.println("RES : " + res);
 		}
 		
 		// System.out.println("sightAngle : " + sightAngle);
@@ -263,11 +268,15 @@ public class Eye {
 	 * @return la probabilité de reproduction
 	 */
 	public double reproductionProbability(int rank, int n, double c) {
-		if ((angle != 0 && curveRadius != W / 2))
+		if (((angle != 0) && curveRadius != (W / 2)))
 			return 0;
-		else if (angle != 0 && (irisSize > (W * Math.cos(angle) / 2)))
+		else if ((angle != 0) && (irisSize > (W * Math.cos(angle) / 2)))
 			return 0;
-		else if (refractionIndex != 1.35 && (depth > (ratio * (aperture / 2)) || (depth < (aperture / 2))))
+		else if(refractionIndex == 1.35 && angle == 0 && irisSize > (0.5 * (W - Math.sqrt(Math.E / (0.746 * Math.sqrt(I))))))
+			return 0;
+		else if(refractionIndex == 1.35 && angle != 0 && irisSize > (0.5 * (W * Math.cos(angle) - Math.sqrt(Math.E / (0.746 * Math.sqrt(I))))))
+			return 0;
+		else if (refractionIndex != 1.35 && (depth > (ratio * aperture / 2) || (depth < (aperture / 2))))
 			return 0;
 		else
 			return ((c - 1) / (Math.pow(c, n) - 1)) * Math.pow(c, n - rank);

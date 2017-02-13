@@ -8,7 +8,7 @@ import random.RandomApp;
 import writer_and_reader.CSVWriter;
 
 public class GeneticAlgorithm {
-	private static final int NB_GENERATIONS = 10;
+	private static final int NB_GENERATIONS = 1000;
 	
 	private CSVWriter csv;
 	
@@ -76,6 +76,7 @@ public class GeneticAlgorithm {
 			while(nbChildren < size) {
 				//	SELECTION
 				parents = this.population.selection();
+				System.out.println("PARENTS : " + parents);
 				//	REPRODUCTION
 				children = this.population.reproduction(parents, crossoverRate);
 				//	MUTATION
