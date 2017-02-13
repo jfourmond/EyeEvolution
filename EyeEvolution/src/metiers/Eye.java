@@ -177,13 +177,6 @@ public class Eye {
 		ratio();
 		sightAngle();
 		fitness();
-		
-		System.out.println(this);
-		System.out.print("\tdepth : " + depth);
-		System.out.print("\taperture : " + aperture);
-		System.out.print("\tratio : " + ratio);
-		System.out.print("\tsightAngle : " + sightAngle);
-		System.out.println("\tfitness : " + fitness);
 	}
 
 	/**
@@ -220,30 +213,15 @@ public class Eye {
 	 */
 	public void sightAngle() {
 		double res = 0;
-
-		if (getRefractionIndex() == 1.35) {
+		if (getRefractionIndex() == 1.35)
 			res = 2 * Math.atan(aperture / 2 * depth);
-			System.out.println("RES : " + res);
-		} else if (getRefractionIndex() > 1.35) {
+		else if (getRefractionIndex() > 1.35) {
 			double term_1 = (Math.pow(ratio, 2) * aperture) / (2 * depth);
-			System.out.println("TERM 1 : " + term_1);
 			double term_2 = Math.sqrt(1 + Math.pow(ratio, 2) - ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2))));
-			System.out.println("TERM 2 : " + term_2);
-				System.out.println(1 + Math.pow(ratio, 2));
-				System.out.println(Math.pow(ratio, 2) * Math.pow(aperture, 2));
-				System.out.println(4 * Math.pow(depth, 2));
-				System.out.println((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)));
-				System.out.println(1 + Math.pow(ratio, 2) - (Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)));
-				System.out.println(Math.sqrt(1 + Math.pow(ratio, 2) - ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2)))));
 			double num = term_1 - term_2;
-			System.out.println("NUM : " + num);
 			double denum = 1 + Math.pow(ratio, 2);
-			System.out.println("DENUM : " + denum);
 			res = 2 * Math.asin(num / denum);
-			System.out.println("RES : " + res);
 		}
-		
-		// System.out.println("sightAngle : " + sightAngle);
 		sightAngle = res;
 	}
 
@@ -251,14 +229,33 @@ public class Eye {
 	 * Calcule de la fonction de fitness
 	 */
 	public void fitness() {
-		if(refractionIndex == 1.35)
-			fitness = 0.375 * (depth / aperture) * Math.sqrt(Math.log(0.746 * Math.pow(aperture, 2) * Math.sqrt(I)));
-		else if(refractionIndex > 1.35)
-			fitness = 1 / sightAngle;
-		else {
-			System.err.println("PROBLEME FITNESS ?");
-			fitness = 0;
+		if(isViable()) {
+			if(refractionIndex == 1.35)
+				fitness = 0.375 * (depth / aperture) * Math.sqrt(Math.log(0.746 * Math.pow(aperture, 2) * Math.sqrt(I)));
+			else if(refractionIndex > 1.35)
+				fitness = 1 / sightAngle;
 		}
+		else
+			fitness = 0;
+	}
+	
+	/**
+	 * Teste si l'oeil courant est viable
+	 * @return <code>true</code> si l'oeil est viable, <code>false</code> viable sinon
+	 */
+	public boolean isViable() {
+		if (((angle != 0) && curveRadius != (W / 2)))
+			return false;
+		else if ((angle != 0) && (irisSize > (W * Math.cos(angle) / 2)))
+			return false;
+		else if(refractionIndex == 1.35 && angle == 0 && irisSize > (0.5 * (W - Math.sqrt(Math.E / (0.746 * Math.sqrt(I))))))
+			return false;
+		else if(refractionIndex == 1.35 && angle != 0 && irisSize > (0.5 * (W * Math.cos(angle) - Math.sqrt(Math.E / (0.746 * Math.sqrt(I))))))
+			return false;
+		else if (refractionIndex != 1.35 && (depth > (ratio * aperture / 2) || (depth < (aperture / 2))))
+			return false;
+		else
+			return true;
 	}
 
 	/**
@@ -268,15 +265,7 @@ public class Eye {
 	 * @return la probabilité de reproduction
 	 */
 	public double reproductionProbability(int rank, int n, double c) {
-		if (((angle != 0) && curveRadius != (W / 2)))
-			return 0;
-		else if ((angle != 0) && (irisSize > (W * Math.cos(angle) / 2)))
-			return 0;
-		else if(refractionIndex == 1.35 && angle == 0 && irisSize > (0.5 * (W - Math.sqrt(Math.E / (0.746 * Math.sqrt(I))))))
-			return 0;
-		else if(refractionIndex == 1.35 && angle != 0 && irisSize > (0.5 * (W * Math.cos(angle) - Math.sqrt(Math.E / (0.746 * Math.sqrt(I))))))
-			return 0;
-		else if (refractionIndex != 1.35 && (depth > (ratio * aperture / 2) || (depth < (aperture / 2))))
+		if (!isViable())
 			return 0;
 		else
 			return ((c - 1) / (Math.pow(c, n) - 1)) * Math.pow(c, n - rank);
@@ -327,7 +316,12 @@ public class Eye {
 		sb.append("Rayon de courbure : " + curveRadius + "\t");
 		sb.append("Taille de l'iris : " + irisSize + "\t");
 		sb.append("Angle : " + angle + "\t");
-		sb.append("Indice de réfraction : " + refractionIndex);
+		sb.append("Indice de réfraction : " + refractionIndex + "\t");
+		sb.append("Profondeur : " + depth + "\t");
+		sb.append("Ouverture : " + aperture + "\t");
+		sb.append("Ratio : " + ratio + "\t");
+		sb.append("Angle de vue : " + sightAngle + "\t");
+		sb.append("Fitness : " + fitness);
 		return sb.toString();
 	}
 

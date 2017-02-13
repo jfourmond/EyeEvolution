@@ -76,7 +76,6 @@ public class GeneticAlgorithm {
 			while(nbChildren < size) {
 				//	SELECTION
 				parents = this.population.selection();
-				System.out.println("PARENTS : " + parents);
 				//	REPRODUCTION
 				children = this.population.reproduction(parents, crossoverRate);
 				//	MUTATION
