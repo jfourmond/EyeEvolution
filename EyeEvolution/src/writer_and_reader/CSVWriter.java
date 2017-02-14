@@ -12,6 +12,7 @@ public class CSVWriter {
 	private static final String NEWLINE_DELIMITER = "\n";
 	
 	private static final String COLUMN_GENERATION = "generation";
+	private static final String COLUMN_POPULATION_SIZE = "population-size";
 	private static final String COLUMN_CROSSOVER_RATE = "cross-over-rate";
 	private static final String COLUMN_MUTATION_RATE = "mutation-rate";
 	private static final String COLUMN_AVERAGE_CURVE_RADIUS = "average-curve-radius";
@@ -42,6 +43,7 @@ public class CSVWriter {
 	
 	public void writeHeader() throws IOException {
 		fw.append(COLUMN_GENERATION + SEPARATOR);
+		fw.append(COLUMN_POPULATION_SIZE + SEPARATOR);
 		fw.append(COLUMN_CROSSOVER_RATE + SEPARATOR);
 		fw.append(COLUMN_MUTATION_RATE + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_CURVE_RADIUS + SEPARATOR);
@@ -58,7 +60,7 @@ public class CSVWriter {
 		fw.flush();
 	}
 	
-	public void writeRow(int generation, double crossoverRate, double mutationRate,
+	public void writeRow(int generation, int populationSize, double crossoverRate, double mutationRate,
 			double averageCurveRadius, double averageIrisSize,double averageAngle, double averageRefractionIndex, double averageFitness,
 			double bestEyeCurveRadius, double bestEyeIrisSize, double bestEyeAngle, double bestEyeRefractionIndex, double bestEyeFitness) throws IOException {
 		
@@ -80,6 +82,7 @@ public class CSVWriter {
 		bestEyeFitness = round(bestEyeFitness);
 		
 		fw.append(generation + SEPARATOR);
+		fw.append(populationSize + SEPARATOR);
 		fw.append(crossoverRate + SEPARATOR);
 		fw.append(mutationRate + SEPARATOR);
 		fw.append(averageCurveRadius + SEPARATOR);

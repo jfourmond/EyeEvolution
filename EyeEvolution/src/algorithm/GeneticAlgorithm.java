@@ -8,21 +8,23 @@ import random.RandomApp;
 import writer_and_reader.CSVWriter;
 
 public class GeneticAlgorithm {
-	private static final int NB_GENERATIONS = 1000;
+	// private static final int NB_GENERATIONS = 1000;
 	
 	private CSVWriter csv;
 	
 	private Population population;
 	
 	private int size;
+	private int nbGenerations;
 	private double crossoverRate;
 	private double mutationRate;
 	
 	//	CONSTRUCTEURS
-	public GeneticAlgorithm(Population population, double crossoverRate, double mutationRate) {
+	public GeneticAlgorithm(Population population, int nbGenerations, double crossoverRate, double mutationRate) {
 		this.population = population;
 		this.crossoverRate = crossoverRate;
 		this.mutationRate = mutationRate;
+		this.nbGenerations = nbGenerations;
 		
 		size = population.size();
 		
@@ -59,10 +61,10 @@ public class GeneticAlgorithm {
 	public void run() {
 		int nbGenerations = 0;
 		Eye bestEye = null;
-		while(nbGenerations < NB_GENERATIONS && this.population.size() > 0) {
+		while(nbGenerations < this.nbGenerations && this.population.size() > 0) {
 			bestEye = population.bestEye();
 			try {
-				csv.writeRow(nbGenerations, crossoverRate, mutationRate,
+				csv.writeRow(nbGenerations, size, crossoverRate, mutationRate,
 						this.population.averageCurveRadius(), this.population.averageIrisSize(), this.population.averageAngle(), this.population.averageRefractionIndex(), this.population.averageFitness(),
 						bestEye.getCurveRadius(), bestEye.getIrisSize(), bestEye.getAngle(), bestEye.getRefractionIndex(), bestEye.getFitness());
 			} catch (IOException e) {
