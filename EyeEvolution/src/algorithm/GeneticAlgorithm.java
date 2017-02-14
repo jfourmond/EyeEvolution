@@ -8,8 +8,6 @@ import random.RandomApp;
 import writer_and_reader.CSVWriter;
 
 public class GeneticAlgorithm {
-	// private static final int NB_GENERATIONS = 1000;
-	
 	private CSVWriter csv;
 	
 	private Population population;
@@ -93,8 +91,8 @@ public class GeneticAlgorithm {
 			setPopulation(population);
 			nbGenerations++;
 			
-			System.out.println("Génération n° : " + nbGenerations);
-			System.out.println("\tNOMBRE DE MUTATION : " + nbMutation);
+			System.out.println("Génération n° " + nbGenerations);
+			System.out.println("\tNOMBRE DE MUTANTS : " + nbMutation);
 		}
 		try {
 			csv.close();
