@@ -17,14 +17,16 @@ public class GeneticAlgorithm {
 	private double crossoverRate;
 	private double mutationRate;
 	
+	private Eye bestEye;
+	
 	//	CONSTRUCTEURS
 	public GeneticAlgorithm(Population population, int nbGenerations, double crossoverRate, double mutationRate) {
 		this.population = population;
 		this.crossoverRate = crossoverRate;
 		this.mutationRate = mutationRate;
 		this.nbGenerations = nbGenerations;
-		
-		size = population.size();
+		this.size = population.size();
+		this.bestEye = population.bestEye();
 		
 		try {
 			this.csv = new CSVWriter();
@@ -42,6 +44,8 @@ public class GeneticAlgorithm {
 	
 	public int getSize() { return size; }
 	
+	public Eye getBestEye() { return bestEye; }
+	
 	public CSVWriter getCsv() { return csv; }
 	
 	//	SETTERS
@@ -53,14 +57,21 @@ public class GeneticAlgorithm {
 	
 	public void setSize(int size) { this.size = size; }
 	
+	public void setBestEye(Eye bestEye) { this.bestEye = bestEye; }
+	
 	public void setCsv(CSVWriter csv) { this.csv = csv; }
 	
 	//	METHODES
+	/**
+	 * Exécute l'algorithme génétique
+	 * Edite le meilleur oeil obtenu
+	 */
 	public void run() {
 		int nbGenerations = 0;
 		Eye bestEye = null;
 		while(nbGenerations < this.nbGenerations && this.population.size() > 0) {
 			bestEye = population.bestEye();
+			if(bestEye.getFitness() > this.bestEye.getFitness()) this.bestEye = bestEye;
 			try {
 				csv.writeRow(nbGenerations, size, crossoverRate, mutationRate,
 						this.population.averageCurveRadius(), this.population.averageIrisSize(), this.population.averageAngle(), this.population.averageRefractionIndex(), this.population.averageFitness(),
@@ -72,7 +83,6 @@ public class GeneticAlgorithm {
 			Couple parents = null;
 			Couple children = null;
 			int nbChildren = 0;
-			int nbMutation = 0;
 			while(nbChildren < size) {
 				//	SELECTION
 				parents = this.population.selection();
@@ -80,7 +90,6 @@ public class GeneticAlgorithm {
 				children = this.population.reproduction(parents, crossoverRate);
 				//	MUTATION
 				if(RandomApp.nextDouble() <= mutationRate) {
-					nbMutation++;
 					children.getIndividual1().mutate();
 					children.getIndividual2().mutate();
 				}
@@ -90,9 +99,6 @@ public class GeneticAlgorithm {
 			//	REMPLACEMENT
 			setPopulation(population);
 			nbGenerations++;
-			
-			System.out.println("Génération n° " + nbGenerations);
-			System.out.println("\tNOMBRE DE MUTANTS : " + nbMutation);
 		}
 		try {
 			csv.close();
