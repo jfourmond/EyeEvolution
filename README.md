@@ -1,5 +1,15 @@
 # Eye Evolution
 
+## Avancement
+
+- [x] Programmation de l'algorithme génétique
+- [x] Tester l'exécution
+- [ ] Choisir la taille de la population, le taux de cross-over et le taux de mutation
+- [ ] Exécuter à plusieurs reprises l'algorithme avec des graines différents pour le générateur aléatoire
+- [ ] Sauvegarder l'évolution des paramètres, des grandeurs et de la fitness en fonction de la génération, pour la moyenne de la population et pour le meilleur individu
+- [ ] Visualiser
+- [ ] Rediger le rapport
+
 ## Objectif
 
 L'objectif est de programmer un algorithme génétique permettant de faire évoluer une population d'"individus", où chaque "individu" code les paramètres d'un oeil, d'après la modélisation suivante :
@@ -26,7 +36,7 @@ L'objectif est de programmer un algorithme génétique permettant de faire évol
 
 ## Algorithme
 
-L'algorithme s'exécute jusqu'à ce que le nombre de générations limite soit effectué.
+L'algorithme s'exécute jusqu'à ce que le nombre de générations limite soit atteint.
 
 ### Paramètres
 
