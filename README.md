@@ -23,3 +23,33 @@ L'objectif est de programmer un algorithme génétique permettant de faire évol
 - Taille initiale de l'iris **i = 0**
 - Angle **&Phi;**<sub>1</sub> initial : **&Phi;**<sub>1</sub>** = 0**
 - Indice initial de réfraction au centre de la lentille **n**<sub>0</sub>** = 1.35**
+
+## Algorithme
+
+L'algorithme s'exécute jusqu'à ce que le nombre de générations limite soit effectué.
+
+### Paramètres
+
+- Taille de la population :
+- Nombre de générations :
+- Taux de cross-over :
+- Taux de mutation : 
+
+### Processus de sélection
+
+1. Tri de la population en fonction de leur valeur de fitness
+2. Récupération des probabilités de reproduction
+3. Création du "camembert" en fonction de la probabilité de reproduction
+4. Choix aléatoire de deux parents en fonction du camembert
+
+### Processus de reproduction
+
+L'enfant détiendra les caractéristiques aléatoires en fonction des caractéristiques des parents et du taux de cross-over.
+
+### Processus de mutation
+
+Les enfants produits muteront en fonction du taux de mutation. Une seule caractéristique de l'enfant sera modifié (addition) par un double gaussien aléatoire.
+
+### Processus de remplacement
+
+Les étapes de sélection, de reproduction et de remplacement sont effectuées jusqu'à ce que la population soit entièrement renouvelée.
