@@ -214,7 +214,7 @@ public class Eye {
 	public void sightAngle() {
 		double res = 0;
 		if (getRefractionIndex() == 1.35)
-			res = 2 * Math.atan(aperture / 2 * depth);
+			res = 2 * Math.atan(aperture / (2 * depth));
 		else if (getRefractionIndex() > 1.35) {
 			double term_1 = (Math.pow(ratio, 2) * aperture) / (2 * depth);
 			double term_2 = Math.sqrt(1 + Math.pow(ratio, 2) - ((Math.pow(ratio, 2) * Math.pow(aperture, 2)) / (4 * Math.pow(depth, 2))));
