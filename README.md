@@ -1,5 +1,11 @@
 # Eye Evolution
 
+## Contributeurs
+
+[<img alt="FOURMOND Jérôme" src="https://avatars2.githubusercontent.com/u/15089371" width="100">](https://github.com/jfourmond) | [<img alt="LEROY Stanislas" src="https://avatars3.githubusercontent.com/u/1542829" width="100">](https://github.com/stanislasleroy) |
+------------------------|---------------------------|
+[@jfourmond](https://github.com/jfourmond	) | [@stanislasleroy](https://github.com/stanislasleroy)
+
 ## Avancement
 
 - [x] Programmation de l'algorithme génétique
