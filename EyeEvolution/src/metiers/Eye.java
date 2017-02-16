@@ -290,9 +290,7 @@ public class Eye {
 	/**
 	 * Met à jour les caractéristiques à partir du tableau des caractéristiques
 	 * 
-	 * @param caracteristics
-	 *            : les caractéristiques à utiliser pour mettre à jour
-	 *            l'individu
+	 * @param caracteristics : les caractéristiques à utiliser pour mettre à jour l'individu
 	 */
 	public void setCaracteristics(double[] caracteristics) {
 		setCurveRadius(caracteristics[0]);
@@ -303,6 +301,9 @@ public class Eye {
 		calculateAttributes();
 	}
 
+	/**
+	 * Mute aléatoirement une caractéristique de l'oeil courant à base d'un {@link Double} gaussien aléatoire
+	 */
 	public void mutate() {
 		double[] caracteristics = caracteristics();
 		int c = RandomApp.nextInt(4);
