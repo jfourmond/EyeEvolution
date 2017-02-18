@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import compare.FitnessCompare;
-import random.RandomApp;
+import random.RandomGen;
 
 public class Population {
 	private static final double c = 0.5;
@@ -152,10 +152,10 @@ public class Population {
 		}
 		// Sélection
 		// Choix du parent 1
-		parent1 = eyes.get(chose[RandomApp.nextInt(100)]);
-		parent2 = eyes.get(chose[RandomApp.nextInt(100)]);
+		parent1 = eyes.get(chose[RandomGen.nextInt(100)]);
+		parent2 = eyes.get(chose[RandomGen.nextInt(100)]);
 		while(parent2 == parent1)
-			parent2 = eyes.get(chose[RandomApp.nextInt(100)]);
+			parent2 = eyes.get(chose[RandomGen.nextInt(100)]);
 		return new Couple(parent1, parent2);
 	}
 	

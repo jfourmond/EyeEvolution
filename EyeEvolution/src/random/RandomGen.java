@@ -1,8 +1,12 @@
 package random;
 import java.util.Random;
 
-public class RandomApp {
-	public static Random rand= new Random(System.currentTimeMillis());
+public class RandomGen {
+	private static Random rand= new Random(System.currentTimeMillis());
+	
+	public static void setSeed(long seed) {
+		rand.setSeed(seed);
+	}
 	
 	public static int nextInt(int bound) {
 		return rand.nextInt(bound);

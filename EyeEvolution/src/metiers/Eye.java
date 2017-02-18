@@ -3,7 +3,7 @@ package metiers;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import random.RandomApp;
+import random.RandomGen;
 import writer_and_reader.RefractionIndexReader;
 
 public class Eye {
@@ -305,8 +305,8 @@ public class Eye {
 	 */
 	public void mutate() {
 		double[] caracteristics = caracteristics();
-		int c = RandomApp.nextInt(4);
-		caracteristics[c] += RandomApp.nextGaussian();
+		int c = RandomGen.nextInt(4);
+		caracteristics[c] += RandomGen.nextGaussian();
 		setCaracteristics(caracteristics);
 	}
 
@@ -351,10 +351,10 @@ public class Eye {
 		double c1[] = e1.caracteristics();
 		double c2[] = e2.caracteristics();
 		// Choix 1
-		caracteristics[0] = (RandomApp.nextDouble() < crossoverRate) ? c1[0] : c2[0];
-		caracteristics[1] = (RandomApp.nextDouble() < crossoverRate) ? c1[1] : c2[1];
-		caracteristics[2] = (RandomApp.nextDouble() < crossoverRate) ? c1[2] : c2[2];
-		caracteristics[3] = (RandomApp.nextDouble() < crossoverRate) ? c1[3] : c2[3];
+		caracteristics[0] = (RandomGen.nextDouble() < crossoverRate) ? c1[0] : c2[0];
+		caracteristics[1] = (RandomGen.nextDouble() < crossoverRate) ? c1[1] : c2[1];
+		caracteristics[2] = (RandomGen.nextDouble() < crossoverRate) ? c1[2] : c2[2];
+		caracteristics[3] = (RandomGen.nextDouble() < crossoverRate) ? c1[3] : c2[3];
 		return caracteristics;
 	}
 }

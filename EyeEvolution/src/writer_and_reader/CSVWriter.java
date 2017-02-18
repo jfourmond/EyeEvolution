@@ -15,6 +15,7 @@ public class CSVWriter {
 	private static final String COLUMN_POPULATION_SIZE = "population-size";
 	private static final String COLUMN_CROSSOVER_RATE = "cross-over-rate";
 	private static final String COLUMN_MUTATION_RATE = "mutation-rate";
+	private static final String COLUMN_SEED = "seed";
 	private static final String COLUMN_AVERAGE_CURVE_RADIUS = "average-curve-radius";
 	private static final String COLUMN_AVERAGE_IRIS_SIZE = "average-iris-size";
 	private static final String COLUMN_AVERAGE_ANGLE = "average-angle";
@@ -50,6 +51,7 @@ public class CSVWriter {
 		fw.append(COLUMN_POPULATION_SIZE + SEPARATOR);
 		fw.append(COLUMN_CROSSOVER_RATE + SEPARATOR);
 		fw.append(COLUMN_MUTATION_RATE + SEPARATOR);
+		fw.append(COLUMN_SEED + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_CURVE_RADIUS + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_IRIS_SIZE + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_ANGLE + SEPARATOR);
@@ -70,6 +72,7 @@ public class CSVWriter {
 	 * @param populationSize : taille de la population
 	 * @param crossoverRate : taux de cross-over
 	 * @param mutationRate : taux de mutation
+	 * @param seed : graine du générateur aléatoire
 	 * @param averageCurveRadius : rayon de courbure moyen de la génération
 	 * @param averageIrisSize : taille de l'iris moyen de la génération
 	 * @param averageAngle : angle moyen de la génération
@@ -82,7 +85,7 @@ public class CSVWriter {
 	 * @param bestEyeFitness : fitness du meilleur oeil de la génération
 	 * @throws IOException
 	 */
-	public void writeRow(int generation, int populationSize, double crossoverRate, double mutationRate,
+	public void writeRow(int generation, int populationSize, double crossoverRate, double mutationRate, long seed,
 			double averageCurveRadius, double averageIrisSize,double averageAngle, double averageRefractionIndex, double averageFitness,
 			double bestEyeCurveRadius, double bestEyeIrisSize, double bestEyeAngle, double bestEyeRefractionIndex, double bestEyeFitness) throws IOException {
 		
@@ -107,6 +110,7 @@ public class CSVWriter {
 		fw.append(populationSize + SEPARATOR);
 		fw.append(crossoverRate + SEPARATOR);
 		fw.append(mutationRate + SEPARATOR);
+		fw.append(seed + SEPARATOR);
 		fw.append(averageCurveRadius + SEPARATOR);
 		fw.append(averageIrisSize + SEPARATOR);
 		fw.append(averageAngle + SEPARATOR);
