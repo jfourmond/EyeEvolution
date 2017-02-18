@@ -26,15 +26,24 @@ public class CSVWriter {
 	private static final String COLUMN_BEST_EYE_REFRACTION_INDEX = "best-eye-refraction-index";
 	private static final String COLUMN_BEST_EYE_FITNESS = "best-eye-fitness";
 	
-	private static final String FILENAME = "_evolution.csv";
 	private static final String PATH = "resources/";
+	private static final String FILENAME = "_evolution";
+	private static final String EXTENSION = ".csv";
 	
+	private long seed;
 	private File file;
 	
 	private FileWriter fw;
 	
 	public CSVWriter(long seed) throws IOException {
-		file = new File(PATH + seed + FILENAME);
+		this.seed = seed;
+		
+		file = new File(PATH + this.seed + FILENAME + EXTENSION);
+		int n=1;
+		while(file.exists()) {
+			file = new File(PATH + this.seed + FILENAME + "_" + n + EXTENSION);
+			n++;
+		}
 		fw = new FileWriter(file);
 		writeHeader();
 	}

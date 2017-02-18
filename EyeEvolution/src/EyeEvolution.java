@@ -22,7 +22,7 @@ public class EyeEvolution {
 			CROSSOVER_RATE = Double.parseDouble(args[2]) / 100.0;
 			// Le taux de Mutation est donné en pourcentage
 			MUTATION_RATE = Double.parseDouble(args[3]) / 100.0;
-		} else if(args.length != 5) {
+		} else if(args.length == 5) {
 			// La taille de la population
 			POPULATION_SIZE = Integer.parseInt(args[0]);
 			// Le nombre de générations à générer
@@ -35,6 +35,7 @@ public class EyeEvolution {
 			SEED = Long.parseLong(args[4]);
 		}
 		
+		System.out.println("Exécution Graine : " + SEED);
 		Population population = new Population(POPULATION_SIZE);
 		GeneticAlgorithm ga = new GeneticAlgorithm(population, NB_GENERATIONS, CROSSOVER_RATE, MUTATION_RATE, SEED);
 		ga.run();
