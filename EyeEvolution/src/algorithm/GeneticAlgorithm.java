@@ -85,8 +85,8 @@ public class GeneticAlgorithm {
 			if(bestEye.getFitness() > this.bestEye.getFitness()) this.bestEye = bestEye;
 			try {
 				csv.writeRow(nbGenerations, size, crossoverRate, mutationRate, seed,
-						this.population.averageCurveRadius(), this.population.averageIrisSize(), this.population.averageAngle(), this.population.averageRefractionIndex(), this.population.averageFitness(),
-						bestEye.getCurveRadius(), bestEye.getIrisSize(), bestEye.getAngle(), bestEye.getRefractionIndex(), bestEye.getFitness());
+						this.population.averageCurveRadius(), this.population.averageIrisSize(), this.population.averageAngle(), this.population.averageRefractionIndex(), this.population.averageDepth(), this.population.averageAperture(), this.population.averageRatio(), this.population.averageSightAngle(),this.population.averageFitness(),
+						bestEye.getCurveRadius(), bestEye.getIrisSize(), bestEye.getAngle(), bestEye.getRefractionIndex(), bestEye.getDepth(), bestEye.getAperture(), bestEye.getRatio(), bestEye.getSightAngle(), bestEye.getFitness());
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

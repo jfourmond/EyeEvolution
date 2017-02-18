@@ -89,7 +89,7 @@ public class Eye {
 		return depth;
 	}
 
-	public double getOpening() {
+	public double getAperture() {
 		return aperture;
 	}
 
@@ -221,6 +221,7 @@ public class Eye {
 			double num = term_1 - term_2;
 			double denum = 1 + Math.pow(ratio, 2);
 			res = 2 * Math.asin(num / denum);
+			if(Double.isNaN(res)) res = 0;
 		}
 		sightAngle = res;
 	}

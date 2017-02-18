@@ -15,15 +15,25 @@ public class CSVWriter {
 	private static final String COLUMN_CROSSOVER_RATE = "cross-over-rate";
 	private static final String COLUMN_MUTATION_RATE = "mutation-rate";
 	private static final String COLUMN_SEED = "seed";
+	
 	private static final String COLUMN_AVERAGE_CURVE_RADIUS = "average-curve-radius";
 	private static final String COLUMN_AVERAGE_IRIS_SIZE = "average-iris-size";
 	private static final String COLUMN_AVERAGE_ANGLE = "average-angle";
 	private static final String COLUMN_AVERAGE_REFRACTION_INDEX = "average-refraction-index";
+	private static final String COLUMN_AVERAGE_DEPTH = "average-depth";
+	private static final String COLUMN_AVERAGE_APERTURE = "average-aperture";
+	private static final String COLUMN_AVERAGE_RATIO = "average-ratio";
+	private static final String COLUMN_AVERAGE_SIGHT_ANGLE = "average-sight-angle";
 	private static final String COLUMN_AVERAGE_FITNESS = "average-fitness";
+	
 	private static final String COLUMN_BEST_EYE_CURVE_RADIUS = "best-eye-curve-radius";
 	private static final String COLUMN_BEST_EYE_IRIS_SIZE = "best-eye-iris-size";
 	private static final String COLUMN_BEST_EYE_ANGLE = "best-eye-angle";
 	private static final String COLUMN_BEST_EYE_REFRACTION_INDEX = "best-eye-refraction-index";
+	private static final String COLUMN_BEST_EYE_DEPTH = "best-eye-depth";
+	private static final String COLUMN_BEST_EYE_APERTURE = "best-eye-aperture";
+	private static final String COLUMN_BEST_EYE_RATIO = "best-eye-ratio";
+	private static final String COLUMN_BEST_EYE_SIGHT_ANGLE = "best-eye-sight-angle";
 	private static final String COLUMN_BEST_EYE_FITNESS = "best-eye-fitness";
 	
 	private static final String PATH = "resources/";
@@ -58,16 +68,26 @@ public class CSVWriter {
 		fw.append(COLUMN_CROSSOVER_RATE + SEPARATOR);
 		fw.append(COLUMN_MUTATION_RATE + SEPARATOR);
 		fw.append(COLUMN_SEED + SEPARATOR);
+		
 		fw.append(COLUMN_AVERAGE_CURVE_RADIUS + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_IRIS_SIZE + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_ANGLE + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_REFRACTION_INDEX + SEPARATOR);
+		fw.append(COLUMN_AVERAGE_DEPTH + SEPARATOR);
+		fw.append(COLUMN_AVERAGE_APERTURE + SEPARATOR);
+		fw.append(COLUMN_AVERAGE_RATIO + SEPARATOR);
+		fw.append(COLUMN_AVERAGE_SIGHT_ANGLE + SEPARATOR);
 		fw.append(COLUMN_AVERAGE_FITNESS + SEPARATOR);
+		
 		fw.append(COLUMN_BEST_EYE_CURVE_RADIUS + SEPARATOR);
 		fw.append(COLUMN_BEST_EYE_IRIS_SIZE + SEPARATOR);
 		fw.append(COLUMN_BEST_EYE_ANGLE + SEPARATOR);
 		fw.append(COLUMN_BEST_EYE_REFRACTION_INDEX + SEPARATOR);
-		fw.append(COLUMN_BEST_EYE_FITNESS + SEPARATOR);
+		fw.append(COLUMN_BEST_EYE_DEPTH + SEPARATOR);
+		fw.append(COLUMN_BEST_EYE_APERTURE + SEPARATOR);
+		fw.append(COLUMN_BEST_EYE_RATIO + SEPARATOR);
+		fw.append(COLUMN_BEST_EYE_SIGHT_ANGLE + SEPARATOR);
+		fw.append(COLUMN_BEST_EYE_FITNESS);
 		fw.append(NEWLINE_DELIMITER);
 		fw.flush();
 	}
@@ -92,24 +112,29 @@ public class CSVWriter {
 	 * @throws IOException
 	 */
 	public void writeRow(int generation, int populationSize, double crossoverRate, double mutationRate, long seed,
-			double averageCurveRadius, double averageIrisSize,double averageAngle, double averageRefractionIndex, double averageFitness,
-			double bestEyeCurveRadius, double bestEyeIrisSize, double bestEyeAngle, double bestEyeRefractionIndex, double bestEyeFitness) throws IOException {
+			double averageCurveRadius, double averageIrisSize,double averageAngle, double averageRefractionIndex, double averageDepth, double averageAperture, double averageRatio, double averageSightAngle, double averageFitness,
+			double bestEyeCurveRadius, double bestEyeIrisSize, double bestEyeAngle, double bestEyeRefractionIndex, double bestEyeDepth, double bestEyeAperture,double bestEyeRatio, double bestEyeSightAngle, double bestEyeFitness) throws IOException {
 		
-		// Arrondir averageCurveRadius
+		// Arrondir les valeurs moyennes
 		averageCurveRadius = round(averageCurveRadius);
-		// Arrondir averageIrisSize
 		averageIrisSize = round(averageIrisSize);
-		// Arrondir averageAngle
 		averageAngle = round(averageAngle);
-		// Arrondir averageRefractionIndex
 		averageRefractionIndex = round(averageRefractionIndex);
-		// Arrondir averageFitness
+		averageDepth = round(averageDepth);
+		averageAperture = round(averageAperture);
+		averageRatio = round(averageRatio);
+		averageSightAngle = round(averageSightAngle);
 		averageFitness = round(averageFitness);
+		
 		// Arrondir bestEye
 		bestEyeCurveRadius = round(bestEyeCurveRadius);
 		bestEyeIrisSize = round(bestEyeIrisSize);
 		bestEyeAngle = round(bestEyeAngle);
 		bestEyeRefractionIndex = round(bestEyeRefractionIndex);
+		bestEyeDepth = round(bestEyeDepth);
+		bestEyeAperture = round(bestEyeAperture);
+		bestEyeRatio = round(bestEyeRatio);
+		bestEyeSightAngle = round(bestEyeSightAngle);
 		bestEyeFitness = round(bestEyeFitness);
 		
 		fw.append(generation + SEPARATOR);
@@ -117,16 +142,27 @@ public class CSVWriter {
 		fw.append(crossoverRate + SEPARATOR);
 		fw.append(mutationRate + SEPARATOR);
 		fw.append(seed + SEPARATOR);
+		
 		fw.append(averageCurveRadius + SEPARATOR);
 		fw.append(averageIrisSize + SEPARATOR);
 		fw.append(averageAngle + SEPARATOR);
 		fw.append(averageRefractionIndex + SEPARATOR);
+		fw.append(averageDepth + SEPARATOR);
+		fw.append(averageAperture + SEPARATOR);
+		fw.append(averageRatio + SEPARATOR);
+		fw.append(averageSightAngle + SEPARATOR);
 		fw.append(averageFitness + SEPARATOR);
+		
 		fw.append(bestEyeCurveRadius + SEPARATOR);
 		fw.append(bestEyeIrisSize + SEPARATOR);
 		fw.append(bestEyeAngle + SEPARATOR);
 		fw.append(bestEyeRefractionIndex + SEPARATOR);
-		fw.append(bestEyeFitness + SEPARATOR);
+		fw.append(bestEyeDepth +SEPARATOR);
+		fw.append(bestEyeAperture + SEPARATOR);
+		fw.append(bestEyeRatio + SEPARATOR);
+		fw.append(bestEyeSightAngle + SEPARATOR);
+		fw.append(bestEyeFitness + "");
+		
 		fw.append(NEWLINE_DELIMITER);
 		fw.flush();
 	}

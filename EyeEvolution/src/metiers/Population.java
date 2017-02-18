@@ -97,14 +97,57 @@ public class Population {
 	}
 	
 	/**
+	 * Calcule la moyenne de la profondeur de la population
+	 * @return la moyenne de la profondeur de la population
+	 */
+	public double averageDepth() {
+		double sumDepth = 0;
+		for(Eye eye : eyes)
+			sumDepth += eye.getDepth();
+		return sumDepth / eyes.size();
+	}
+	
+	/**
+	 * Calcule la moyenne de l'ouverture de la population
+	 * @return la moyenne de l'ouverture de la population
+	 */
+	public double averageAperture() {
+		double sumAperture = 0;
+		for(Eye eye : eyes)
+			sumAperture += eye.getAperture();
+		return sumAperture / eyes.size();
+	}
+	
+	/**
+	 * Calcule la moyenne du ratio de la population
+	 * @return la moyenne du ratio de la population
+	 */
+	public double averageRatio() {
+		double sumRatio = 0;
+		for(Eye eye : eyes)
+			sumRatio += eye.getRatio();
+		return sumRatio / eyes.size();
+	}
+	
+	/**
+	 * Calcule la moyenne de l'angle de vue de la population
+	 * @return la moyenne de l'angle de vue de la population
+	 */
+	public double averageSightAngle() {
+		double sumSightAngle = 0;
+		for(Eye eye : eyes)
+			sumSightAngle += eye.getSightAngle();
+		return sumSightAngle / eyes.size();
+	}
+	
+	/**
 	 * Calcule la moyenne de la fonction de fitness de la population
 	 * @return la moyenne de la fonction de fitness de la population
 	 */
 	public double averageFitness() {
 		double sumFitness = 0;
-		for(Eye eye : eyes) {
+		for(Eye eye : eyes)
 			sumFitness += eye.getFitness();
-		}
 		return sumFitness / eyes.size();
 	}
 	
