@@ -79,11 +79,15 @@ Le programme nécessite le répertoire *resources* contenant le fichier *indice_
 - le taux de cross-over (en pourcentage)
 - le taux de mutation (en pourcentage)
 
+```
 	java -jar EyeEvolution.jar [population-size] [generations] [crossover-rate] [mutation-rate]
+```	
 
 Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'archive Java se fait de la façon suivante : 
 
+```
 	java -jar EyeEvolution.jar 40 50000 50 20
+```
 	
 A l'exécution, le programme produit un fichier au format *csv* contenant les détails suivants pour chaque génération :
 - numéro de la generation
