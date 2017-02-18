@@ -89,7 +89,7 @@ Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'a
 	java -jar EyeEvolution.jar 40 50000 50 20
 ```
 	
-A l'exécution, le programme produit un fichier au format *csv* contenant les détails suivants pour chaque génération :
+A l'exécution, le programme produit un fichier au format *csv* dans le répertoire *resources* contenant les détails suivants pour chaque génération :
 - numéro de la generation
 - taille de la population
 - taux de cross-over
