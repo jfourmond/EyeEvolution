@@ -41,7 +41,11 @@ public class CSVWriter {
 		writeHeader();
 	}
 	
-	public void writeHeader() throws IOException {
+	/**
+	 * Ecriture des Headers
+	 * @throws IOException
+	 */
+	private void writeHeader() throws IOException {
 		fw.append(COLUMN_GENERATION + SEPARATOR);
 		fw.append(COLUMN_POPULATION_SIZE + SEPARATOR);
 		fw.append(COLUMN_CROSSOVER_RATE + SEPARATOR);
@@ -60,6 +64,24 @@ public class CSVWriter {
 		fw.flush();
 	}
 	
+	/**
+	 * Ecriture d'une ligne avec les paramètres suivants :
+	 * @param generation : numéro de la génération
+	 * @param populationSize : taille de la population
+	 * @param crossoverRate : taux de cross-over
+	 * @param mutationRate : taux de mutation
+	 * @param averageCurveRadius : rayon de courbure moyen de la génération
+	 * @param averageIrisSize : taille de l'iris moyen de la génération
+	 * @param averageAngle : angle moyen de la génération
+	 * @param averageRefractionIndex : indice de réfraction moyen de la génération
+	 * @param averageFitness : fitness moyen de la génération
+	 * @param bestEyeCurveRadius : rayon de courbure du meilleur oeil de la génération
+	 * @param bestEyeIrisSize : taille de l'iris du meilleur oeil de la génération
+	 * @param bestEyeAngle : angle du meilleur oeil de la génération
+	 * @param bestEyeRefractionIndex : indice de réfraction du meilleur oeil de la génération
+	 * @param bestEyeFitness : fitness du meilleur oeil de la génération
+	 * @throws IOException
+	 */
 	public void writeRow(int generation, int populationSize, double crossoverRate, double mutationRate,
 			double averageCurveRadius, double averageIrisSize,double averageAngle, double averageRefractionIndex, double averageFitness,
 			double bestEyeCurveRadius, double bestEyeIrisSize, double bestEyeAngle, double bestEyeRefractionIndex, double bestEyeFitness) throws IOException {
@@ -99,6 +121,11 @@ public class CSVWriter {
 		fw.flush();
 	}
 	
+	/**
+	 * Arrondit le double en paramètre à trois décimales
+	 * @param value : double à arrondir
+	 * @return le double arrondi à trois décimales
+	 */
 	private double round(double value) {
 		BigDecimal bd = new BigDecimal(value);
 		bd.setScale(3, RoundingMode.HALF_UP);
