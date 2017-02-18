@@ -316,7 +316,7 @@ public class Eye {
 		sb.append("Rayon de courbure : " + curveRadius + "\t");
 		sb.append("Taille de l'iris : " + irisSize + "\t");
 		sb.append("Angle : " + angle + "\t");
-		sb.append("Indice de réfraction : " + refractionIndex + "\t");
+		sb.append("Indice de réfraction : " + refractionIndex + "\n\t");
 		sb.append("Profondeur : " + depth + "\t");
 		sb.append("Ouverture : " + aperture + "\t");
 		sb.append("Ratio : " + ratio + "\t");

@@ -5,7 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Date;
 
 public class CSVWriter {
 	private static final String SEPARATOR = " ; ";
@@ -30,14 +29,12 @@ public class CSVWriter {
 	private static final String FILENAME = "_evolution.csv";
 	private static final String PATH = "resources/";
 	
-	private Date date;
 	private File file;
 	
 	private FileWriter fw;
 	
-	public CSVWriter() throws IOException {
-		date = new Date();
-		file = new File(PATH + date.getTime() + FILENAME);
+	public CSVWriter(long seed) throws IOException {
+		file = new File(PATH + seed + FILENAME);
 		fw = new FileWriter(file);
 		writeHeader();
 	}

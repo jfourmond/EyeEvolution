@@ -33,7 +33,7 @@ public class GeneticAlgorithm {
 		RandomGen.setSeed(this.seed);
 		
 		try {
-			this.csv = new CSVWriter();
+			this.csv = new CSVWriter(this.seed);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
