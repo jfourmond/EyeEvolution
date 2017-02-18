@@ -11,8 +11,8 @@
 - [x] Programmation de l'algorithme génétique
 - [x] Tester l'exécution
 - [x] Choisir la taille de la population, le taux de cross-over et le taux de mutation
-- [ ] Exécuter à plusieurs reprises l'algorithme avec des graines différents pour le générateur aléatoire
-- [ ] Sauvegarder l'évolution des paramètres, des grandeurs et de la fitness en fonction de la génération, pour la moyenne de la population et pour le meilleur individu
+- [x] Exécuter à plusieurs reprises l'algorithme avec des graines différents pour le générateur aléatoire
+- [x] Sauvegarder l'évolution des paramètres, des grandeurs et de la fitness en fonction de la génération, pour la moyenne de la population et pour le meilleur individu
 - [ ] Visualiser
 - [ ] Rediger le rapport
 
@@ -50,6 +50,7 @@ L'algorithme s'exécute jusqu'à ce que le nombre de générations limite soit a
 - Nombre de générations : **50 000**
 - Taux de cross-over : **0.5**
 - Taux de mutation : **0.2**
+- Graines du générateur aléatoire : **[ 1487422477451, 1487424485848, 1487424573992]**
 
 ### Processus de sélection
 
@@ -79,21 +80,24 @@ Le programme nécessite le répertoire *resources* contenant le fichier *indice_
 - le taux de cross-over (en pourcentage)
 - le taux de mutation (en pourcentage)
 
+Un cinquième argument est optionnel : la graine du générateur aléatoire.
+
 ```
-	java -jar EyeEvolution.jar [population-size] [generations] [crossover-rate] [mutation-rate]
+	java -jar EyeEvolution.jar [population-size] [generations] [crossover-rate] [mutation-rate] ([seed])
 ```	
 
-Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'archive Java se fait de la façon suivante : 
+Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'archive Java se fait de la façon suivante (par exemple, avec la première graine du générateur aléatoire) : 
 
 ```
-	java -jar EyeEvolution.jar 40 50000 50 20
+	java -jar EyeEvolution.jar 40 50000 50 20 1487422477451
 ```
 	
-A l'exécution, le programme produit un fichier au format *csv* dans le répertoire *resources* contenant les détails suivants pour chaque génération :
+A l'exécution, le programme produit un fichier au format *csv* contenant les détails suivants pour chaque génération :
 - numéro de la generation
 - taille de la population
 - taux de cross-over
 - taux de mutation
+- graine du générateur aléatoire
 - rayon de courbure moyen
 - taille de l'iris moyen
 - angle moyen
