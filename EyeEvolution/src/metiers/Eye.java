@@ -234,8 +234,7 @@ public class Eye {
 				fitness = 0.375 * (depth / aperture) * Math.sqrt(Math.log(0.746 * Math.pow(aperture, 2) * Math.sqrt(I)));
 			else if(refractionIndex > 1.35)
 				fitness = 1 / sightAngle;
-		}
-		else
+		} else
 			fitness = 0;
 	}
 	
@@ -326,6 +325,11 @@ public class Eye {
 		return sb.toString();
 	}
 
+	/**
+	 * Arrondi le double passé en paramètre à trois décimales après la virgule
+	 * @param value : le double à arrondir
+	 * @return le double arrondi à trois décimales après la virgule
+	 */
 	private double round(double value) {
 		BigDecimal bd = new BigDecimal(value);
 		bd.setScale(3, RoundingMode.HALF_UP);

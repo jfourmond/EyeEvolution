@@ -2,9 +2,9 @@ import algorithm.GeneticAlgorithm;
 import metiers.Population;
 
 public class EyeEvolution {
-	private static int POPULATION_SIZE = 40;
+	private static int POPULATION_SIZE = 10;
 	private static int NB_GENERATIONS = 1000;
-	private static double CROSSOVER_RATE = 0.01;
+	private static double CROSSOVER_RATE = 0.1;
 	private static double MUTATION_RATE = 0.01;
 	
 	public static void main(String[] args) {

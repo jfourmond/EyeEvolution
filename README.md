@@ -10,7 +10,7 @@
 
 - [x] Programmation de l'algorithme génétique
 - [x] Tester l'exécution
-- [ ] Choisir la taille de la population, le taux de cross-over et le taux de mutation
+- [x] Choisir la taille de la population, le taux de cross-over et le taux de mutation
 - [ ] Exécuter à plusieurs reprises l'algorithme avec des graines différents pour le générateur aléatoire
 - [ ] Sauvegarder l'évolution des paramètres, des grandeurs et de la fitness en fonction de la génération, pour la moyenne de la population et pour le meilleur individu
 - [ ] Visualiser
@@ -46,10 +46,10 @@ L'algorithme s'exécute jusqu'à ce que le nombre de générations limite soit a
 
 ### Paramètres
 
-- Taille de la population : *[TODO]*
-- Nombre de générations : *[TODO]*
-- Taux de cross-over : *[TODO]*
-- Taux de mutation : *[TODO]*
+- Taille de la population : **40**
+- Nombre de générations : **50 000**
+- Taux de cross-over : **0.5**
+- Taux de mutation : **0.2**
 
 ### Processus de sélection
 
@@ -69,3 +69,34 @@ Les enfants produits muteront en fonction du taux de mutation. Une seule caract�
 ### Processus de remplacement
 
 Les étapes de sélection, de reproduction et de remplacement sont effectuées jusqu'à ce que la population soit entièrement renouvelée.
+
+## Execution du programme
+
+Le programme nécessite le répertoire *resources* contenant le fichier *indice_refraction.dat* pour fonctionner.
+4 arguments sont à spécifier au programme : 
+- la taille de la population
+- le nombre de générations
+- le taux de cross-over (en pourcentage)
+- le taux de mutation (en pourcentage)
+
+	java -jar EyeEvolution.jar [population-size] [generations] [crossover-rate] [mutation-rate]
+
+Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'archive Java se fait de la façon suivante : 
+
+	java -jar EyeEvolution.jar 40 50000 50 20
+	
+A l'exécution, le programme produit un fichier au format *csv* contenant les détails suivants pour chaque génération :
+- numéro de la generation
+- taille de la population
+- taux de cross-over
+- taux de mutation
+- rayon de courbure moyen
+- taille de l'iris moyen
+- angle moyen
+- indice de réfraction moyen
+- fitness moyen
+- rayon de courbure du meilleur oeil
+- taille de l'iris du meilleur oeil
+- angle du meilleur oeil
+- indice de réfraction du meilleur oeil
+- fitness du meilleur oeil
