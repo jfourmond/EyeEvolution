@@ -1,0 +1,159 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage[cyr]{aeguill}
+\usepackage[margin=0.8in]{geometry}
+\usepackage{xspace}
+\usepackage{amsmath}
+\usepackage[english,francais]{babel}
+\usepackage{url}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xcolor}
+\usepackage{listings} % pour le code
+\usepackage{graphicx} % pour les figures
+
+% Redefinition de la commande \url pour pour l'utiliser dans un document en français
+% sans avoir de problème avec les deux-points
+% (voir http://perso.mines-albi.fr/~gaborit/latex/latex-in-french.html)
+\let\urlorig\url
+\renewcommand{\url}[1]{%
+  \begin{otherlanguage}{english}\urlorig{#1}\end{otherlanguage}%
+}
+\renewcommand{\contentsname}{Sommaire} % si tableofcontents au d?but
+\newcommand{\Numero}{\No}
+\newcommand{\numero}{\no}
+
+\begin{document}
+
+\title{Compte-rendu du TP \\``Algorithme Génétique''}
+\author{FOURMOND Jérôme, LEROY Stanislas, M2 Informatique - Parcours Intelligence Artificielle}
+\date{\today}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Objectif}
+
+L'objectif de ce TP est de programmer un algorithme génétique permettant de faire évoluer une population d'"individus", où chaque "individu" code les paramètres d'un oeil d'après la modélisation suivante (Figure \ref{fig:modelisation}) :
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=15cm]{modelisation.png}
+\caption{Modelisation}
+\label{fig:modelisation}
+\end{center}
+\end{figure}
+
+En outre, l'oeil peut comporter une lentille sphérique de rayon a=2 centrée sur le centre de l'ouverture (milieu du segment [EF]). Au sein de cette lentille, l'indice de réfraction $n$ suit un gradient allant de $1.35$ (à l'extérieur) à une certaine valeur $n_{0}$.
+
+\section{Constantes}
+
+\begin{itemize}
+\item Tout au long de l'évolution, la largeur maximale de l'oeil (distance AB) reste égale à $W = 1.5$ cm,
+\item L'intensité lumineuse $I$ sera prise égale à $e^{6}$.
+\end{itemize}
+
+\section{Paramètres à faire évoluer}
+
+\begin{itemize}
+\item Rayon de courbure $\rho_{c}$ : peut varier dans la plage $[w/2, 10000]$
+\item Taille de l'iris $i$ : peut varier dans la plage $[0, w/2[$
+\item Angle $\Phi_{1}$ : peut varier dans la plage $[0, \pi/2[$
+\item Indice de réfraction $n_{0}$ au centre de la lentille : peut varier dans la plage $[1.35, 1.55]$
+\end{itemize}
+
+\section{Valeurs initiales}
+
+\begin{itemize}
+\item Rayon de courbure initial $\rho_{c} = 10000$
+\item Taille initiale de l'iris $i = 0$
+\item Angle $\Phi_{1}$ initial : $\Phi_{1} = 0$
+\item Indice initial de réfraction au centre de la lentille $n_{0} = 1.35$
+\end{itemize}
+
+\section{Algorithme}
+
+L'algorithme s'exécute jusqu'à ce que le nombre de générations limite soit atteint.
+
+\subsection{Paramètres}
+
+\begin{itemize}
+\item Taille de la population : $40$
+\item Nombre de générations : $50 000$
+\item Taux de cross-over : $0.5$
+\item Taux de mutation : $0.2$
+\end{itemize}
+
+\subsection{Processus de sélection}
+
+\begin{enumerate}
+\item Tri de la population en fonction de leur valeur de fitness
+\item Récupération des probabilités de reproduction
+\item Création du "camembert" en fonction de la probabilité de reproduction
+\item Choix aléatoire de deux parents en fonction du camembert 
+\end{enumerate}
+
+\subsection{Processus de reproduction}
+
+L'enfant détiendra les caractéristiques aléatoires en fonction des caractéristiques des parents et du taux de cross-over.
+
+\subsection{Processus de mutation}
+
+Les enfants produits muteront en fonction du taux de mutation. Une seule caractéristique de l'enfant sera modifié (addition) par un double gaussien aléatoire.
+
+\subsection{Processus de remplacement}
+
+Les étapes de sélection, de reproduction et de remplacement sont effectuées jusqu'à ce que la population soit entièrement renouvelée.
+
+\section{Programme}
+
+\subsection{Exécution}
+
+Le programme nécessite le répertoire $resources$ contenant le fichier $indice_refraction.dat$ pour fonctionner.
+Quatre arguments sont à spécifier au programme :
+
+\begin{itemize}
+\item la taille de la population
+\item le nombre de générations
+\item le taux de cross-over (en pourcentage)
+\item le taux de mutation (en pourcentage)
+\end{itemize}
+
+Un cinquième argument, optionnel, peut être spécifié : la graine du générateur aléatoire ($seed$).
+
+\begin{lstlisting}
+	java -jar EyeEvolution.jar [population-size] [generations] [crossover-rate] [mutation-rate] ([seed])
+\end{lstlisting}
+
+Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'archive Java se fait de la façon suivante : 
+
+\begin{lstlisting}
+	java -jar EyeEvolution.jar 40 50000 50 20
+\end{lstlisting}
+	
+\subsection{Fichier csv}
+
+A l'exécution, le programme produit un fichier au format $csv$ dans le répertoire $resources$ contenant les détails suivants pour chaque génération :
+\begin{itemize}
+\item numéro de la generation
+\item taille de la population
+\item taux de cross-over
+\item taux de mutation
+\item graine du générateur aléatoire
+\item rayon de courbure moyen
+\item taille de l'iris moyen
+\item angle moyen
+\item indice de réfraction moyen
+\item fitness moyen
+\item rayon de courbure du meilleur oeil
+\item taille de l'iris du meilleur oeil
+\item angle du meilleur oeil
+\item indice de réfraction du meilleur oeil
+\item fitness du meilleur oeil
+\end{itemize}
+
+\section{Visualisation de l'évolution}
+
+\end{document}
