@@ -13,7 +13,7 @@
 - [x] Choisir la taille de la population, le taux de cross-over et le taux de mutation
 - [x] Exécuter à plusieurs reprises l'algorithme avec des graines différents pour le générateur aléatoire
 - [x] Sauvegarder l'évolution des paramètres, des grandeurs et de la fitness en fonction de la génération, pour la moyenne de la population et pour le meilleur individu
-- [ ] Visualiser
+- [x] Visualiser
 - [ ] Rediger le rapport
 
 ## Objectif
@@ -35,10 +35,10 @@ L'objectif est de programmer un algorithme génétique permettant de faire évol
 
 ## Valeurs initiales
 
-- Rayon de courbure initial **&rho;**<sub>c</sub>** = 10000**
+- Rayon de courbure initial **&rho;**<sub>c</sub> **= 10000**
 - Taille initiale de l'iris **i = 0**
-- Angle **&Phi;**<sub>1</sub> initial : **&Phi;**<sub>1</sub>** = 0**
-- Indice initial de réfraction au centre de la lentille **n**<sub>0</sub>** = 1.35**
+- Angle **&Phi;**<sub>1</sub> initial : **&Phi;**<sub>1</sub> **= 0**
+- Indice initial de réfraction au centre de la lentille **n**<sub>0</sub> **= 1.35**
 
 ## Algorithme
 
@@ -108,3 +108,37 @@ A l'exécution, le programme produit un fichier au format *csv* contenant les d�
 - angle du meilleur oeil
 - indice de réfraction du meilleur oeil
 - fitness du meilleur oeil
+
+## Visualisations de l'évolution
+
+### Evolution du rayon de courbure du meilleur oeil en fonction de la génération
+
+![BestEyeCurveRadius](/Rapport/best_eye_curve_radius.jpeg)
+
+### Evolution de la taille de l'iris du meilleur oeil en fonction de la génération
+
+![BestEyeIrisSize](/Rapport/best_eye_iris_size.jpeg)
+
+### Evolution de l'angle du meilleur oeil en fonction de la génération
+
+![BestEyeAngle](/Rapport/best_eye_angle.jpeg)
+
+### Evolution de l'indice de réfraction du meilleur oeil en fonction de la génération
+
+![BestEyeRefractionIndex](/Rapport/best_eye_refraction_index.jpeg)
+
+### Evolution de la profondeur du meilleur oeil en fonction de la génération
+
+![BestEyeDepth](/Rapport/best_eye_depth.jpeg)
+
+### Evolution de l'ouverture du meilleur oeil en fonction de la génération
+
+![BestEyeAperture](/Rapport/best_eye_aperture.jpeg)
+
+### Evolution de l'angle de vue du meilleur oeil en fonction de la génération
+
+![BestEyeSightAngle](/Rapport/best_eye_sight_angle.jpeg)
+
+### Evolution de la fitness du meilleur oeil en fonction de la génération
+
+![BestEyeFitness](/Rapport/best_eye_fitness.jpeg)
