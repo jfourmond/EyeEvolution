@@ -1,6 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 
-\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
 \usepackage[cyr]{aeguill}
 \usepackage[margin=0.8in]{geometry}
 \usepackage{xspace}
@@ -12,9 +12,10 @@
 \usepackage{xcolor}
 \usepackage{listings} % pour le code
 \usepackage{graphicx} % pour les figures
+\usepackage{subcaption}
 
-% Redefinition de la commande \url pour pour l'utiliser dans un document en franÁais
-% sans avoir de problËme avec les deux-points
+% Redefinition de la commande \url pour pour l'utiliser dans un document en fran√ßais
+% sans avoir de probl√®me avec les deux-points
 % (voir http://perso.mines-albi.fr/~gaborit/latex/latex-in-french.html)
 \let\urlorig\url
 \renewcommand{\url}[1]{%
@@ -26,8 +27,10 @@
 
 \begin{document}
 
-\title{Compte-rendu du TP \\``Algorithme GÈnÈtique''}
-\author{FOURMOND JÈrÙme, LEROY Stanislas, M2 Informatique - Parcours Intelligence Artificielle}
+\title{Compte-rendu de TP \\``Algorithme G√©n√©tique''}
+\author{FOURMOND J√©r√¥me \& Stanislas LEROY
+\\ M2 Informatique ‚Äì Parcours Intelligence Artificielle
+\\Universit√© Claude-Bernard Lyon 1}
 \date{\today}
 \maketitle
 
@@ -36,7 +39,7 @@
 
 \section{Objectif}
 
-L'objectif de ce TP est de programmer un algorithme gÈnÈtique permettant de faire Èvoluer une population d'"individus", o˘ chaque "individu" code les paramËtres d'un oeil d'aprËs la modÈlisation suivante (Figure \ref{fig:modelisation}) :
+L'objectif de ce TP est de programmer un algorithme g√©n√©tique permettant de faire √©voluer une population d'individus, o√π chaque individu code les param√®tres d'un oeil d'apr√®s la mod√©lisation suivante (Figure \ref{fig:modelisation}) :
 
 \begin{figure}[htbp]
 \begin{center}
@@ -46,22 +49,22 @@ L'objectif de ce TP est de programmer un algorithme gÈnÈtique permettant de fair
 \end{center}
 \end{figure}
 
-En outre, l'oeil peut comporter une lentille sphÈrique de rayon a=2 centrÈe sur le centre de l'ouverture (milieu du segment [EF]). Au sein de cette lentille, l'indice de rÈfraction $n$ suit un gradient allant de $1.35$ (‡ l'extÈrieur) ‡ une certaine valeur $n_{0}$.
+En outre, l'oeil peut comporter une lentille sph√©rique de rayon a=2 centr√©e sur le centre de l'ouverture (milieu du segment [EF]). Au sein de cette lentille, l'indice de r√©fraction $n$ suit un gradient allant de $1.35$ (√† l'ext√©rieur) √† une certaine valeur $n_{0}$.
 
 \section{Constantes}
 
 \begin{itemize}
-\item Tout au long de l'Èvolution, la largeur maximale de l'oeil (distance AB) reste Ègale ‡ $W = 1.5$ cm,
-\item L'intensitÈ lumineuse $I$ sera prise Ègale ‡ $e^{6}$.
+\item Tout au long de l'√©volution, la largeur maximale de l'oeil (distance AB) reste √©gale √† $w = 1.5$ cm,
+\item L'intensit√© lumineuse $I$ sera prise √©gale √† $e^{6}$.
 \end{itemize}
 
-\section{ParamËtres ‡ faire Èvoluer}
+\section{Param√®tres √† faire √©voluer}
 
 \begin{itemize}
 \item Rayon de courbure $\rho_{c}$ : peut varier dans la plage $[w/2, 10000]$
 \item Taille de l'iris $i$ : peut varier dans la plage $[0, w/2[$
 \item Angle $\Phi_{1}$ : peut varier dans la plage $[0, \pi/2[$
-\item Indice de rÈfraction $n_{0}$ au centre de la lentille : peut varier dans la plage $[1.35, 1.55]$
+\item Indice de r√©fraction $n_{0}$ au centre de la lentille : peut varier dans la plage $[1.35, 1.55]$
 \end{itemize}
 
 \section{Valeurs initiales}
@@ -70,64 +73,64 @@ En outre, l'oeil peut comporter une lentille sphÈrique de rayon a=2 centrÈe sur 
 \item Rayon de courbure initial $\rho_{c} = 10000$
 \item Taille initiale de l'iris $i = 0$
 \item Angle $\Phi_{1}$ initial : $\Phi_{1} = 0$
-\item Indice initial de rÈfraction au centre de la lentille $n_{0} = 1.35$
+\item Indice initial de r√©fraction au centre de la lentille $n_{0} = 1.35$
 \end{itemize}
 
 \section{Algorithme}
 
-L'algorithme s'exÈcute jusqu'‡ ce que le nombre de gÈnÈrations limite soit atteint.
+L'algorithme s'ex√©cute jusqu'√† ce que le nombre de g√©n√©rations limite soit atteint.
 
-\subsection{ParamËtres}
+\subsection{Param√®tres}
 
 \begin{itemize}
 \item Taille de la population : $40$
-\item Nombre de gÈnÈrations : $50 000$
+\item Nombre de g√©n√©rations : $50 000$
 \item Taux de cross-over : $0.5$
 \item Taux de mutation : $0.2$
 \end{itemize}
 
-\subsection{Processus de sÈlection}
+\subsection{Processus de s√©lection}
 
 \begin{enumerate}
 \item Tri de la population en fonction de leur valeur de fitness
-\item RÈcupÈration des probabilitÈs de reproduction
-\item CrÈation du "camembert" en fonction de la probabilitÈ de reproduction
-\item Choix alÈatoire de deux parents en fonction du camembert 
+\item R√©cup√©ration des probabilit√©s de reproduction
+\item Cr√©ation du "camembert" en fonction de la probabilit√© de reproduction
+\item Choix al√©atoire de deux parents en fonction du camembert 
 \end{enumerate}
 
 \subsection{Processus de reproduction}
 
-L'enfant dÈtiendra les caractÈristiques alÈatoires en fonction des caractÈristiques des parents et du taux de cross-over.
+L'enfant d√©tiendra les caract√©ristiques al√©atoires en fonction des caract√©ristiques des parents et du taux de cross-over.
 
 \subsection{Processus de mutation}
 
-Les enfants produits muteront en fonction du taux de mutation. Une seule caractÈristique de l'enfant sera modifiÈ (addition) par un double gaussien alÈatoire.
+Les enfants produits muteront en fonction du taux de mutation. Une seule caract√©ristique de l'enfant sera modifi√©e (addition) par un double gaussien al√©atoire.
 
 \subsection{Processus de remplacement}
 
-Les Ètapes de sÈlection, de reproduction et de remplacement sont effectuÈes jusqu'‡ ce que la population soit entiËrement renouvelÈe.
+Les √©tapes de s√©lection, de reproduction et de remplacement sont effectu√©es jusqu'√† ce que la population soit enti√®rement renouvel√©e.
 
 \section{Programme}
 
-\subsection{ExÈcution}
+\subsection{Ex√©cution}
 
-Le programme nÈcessite le rÈpertoire $resources$ contenant le fichier $indice_refraction.dat$ pour fonctionner.
-Quatre arguments sont ‡ spÈcifier au programme :
+Le programme n√©cessite le r√©pertoire $resources$ contenant le fichier $indice\_refraction.dat$ pour fonctionner.
+Quatre arguments sont √† sp√©cifier au programme :
 
 \begin{itemize}
 \item la taille de la population
-\item le nombre de gÈnÈrations
+\item le nombre de g√©n√©rations
 \item le taux de cross-over (en pourcentage)
 \item le taux de mutation (en pourcentage)
 \end{itemize}
 
-Un cinquiËme argument, optionnel, peut Ítre spÈcifiÈ : la graine du gÈnÈrateur alÈatoire ($seed$).
+Un cinqui√®me argument, optionnel, peut √™tre sp√©cifi√© : la graine du g√©n√©rateur al√©atoire ($seed$).
 
 \begin{lstlisting}
 	java -jar EyeEvolution.jar [population-size] [generations] [crossover-rate] [mutation-rate] ([seed])
 \end{lstlisting}
 
-Dans le cas prÈsent, avec les paramËtres choisis, l'appel au programme via l'archive Java se fait de la faÁon suivante : 
+Dans le cas pr√©sent, avec les param√®tres choisis, l'appel au programme via l'archive Java se fait de la fa√ßon suivante : 
 
 \begin{lstlisting}
 	java -jar EyeEvolution.jar 40 50000 50 20
@@ -135,25 +138,396 @@ Dans le cas prÈsent, avec les paramËtres choisis, l'appel au programme via l'arc
 	
 \subsection{Fichier csv}
 
-A l'exÈcution, le programme produit un fichier au format $csv$ dans le rÈpertoire $resources$ contenant les dÈtails suivants pour chaque gÈnÈration :
+A l'ex√©cution, le programme produit un fichier au format $csv$ dans le r√©pertoire $resources$ contenant les d√©tails suivants pour chaque g√©n√©ration :
 \begin{itemize}
-\item numÈro de la generation
+\item num√©ro de la generation
 \item taille de la population
 \item taux de cross-over
 \item taux de mutation
-\item graine du gÈnÈrateur alÈatoire
+\item graine du g√©n√©rateur al√©atoire
 \item rayon de courbure moyen
 \item taille de l'iris moyen
 \item angle moyen
-\item indice de rÈfraction moyen
+\item indice de r√©fraction moyen
 \item fitness moyen
 \item rayon de courbure du meilleur oeil
 \item taille de l'iris du meilleur oeil
 \item angle du meilleur oeil
-\item indice de rÈfraction du meilleur oeil
+\item indice de r√©fraction du meilleur oeil
 \item fitness du meilleur oeil
 \end{itemize}
 
-\section{Visualisation de l'Èvolution}
+\section{R√©sultat}
+
+\subsection{Les diff√©rents tests}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487422477451_evolution_average_curve_radius.jpeg}
+\caption{Test 1 ‚Äì √âvolution du rayon de courbure moyen}
+\label{fig:sub11}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487422477451_evolution_average_fitness.jpeg}
+\caption{Test 1 ‚Äì √âvolution de la fonction fitness moyenne}
+\label{fig:sub12}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487422477451_evolution_average_curve_radius.jpeg}
+%\caption{a}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487422477451_evolution_average_fitness.jpeg}
+%\caption{b}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487422477451_evolution_average_iris_size.jpeg}
+\caption{Test 1 ‚Äì √âvolution de la taille moyenne de l'iris}
+\label{fig:sub13}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487422477451_evolution_average_refraction_index.jpeg}
+\caption{Test 1 ‚Äì √âvolution de l'indice de r√©fraction moyen}
+\label{fig:sub14}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}
+%\begin{center}
+%\includegraphics[width=12cm]{1487422477451_evolution_average_iris_size.jpeg}
+%\caption{c}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487422477451_evolution_average_refraction_index.jpeg}
+%\caption{d}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+
+%\subsection{Test 2}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424485848_evolution_average_curve_radius.jpeg}
+\caption{Test 2 ‚Äì √âvolution du rayon de courbure moyen}
+\label{fig:sub21}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424485848_evolution_average_fitness.jpeg}
+\caption{Test 2 ‚Äì √âvolution de la fonction fitness moyenne}
+\label{fig:sub22}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424485848_evolution_average_curve_radius.jpeg}
+%\caption{a}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424485848_evolution_average_fitness.jpeg}
+%\caption{b}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424485848_evolution_average_iris_size.jpeg}
+\caption{Test 2 ‚Äì √âvolution de la taille moyenne de l'iris}
+\label{fig:sub23}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424485848_evolution_average_refraction_index.jpeg}
+\caption{Test 2 ‚Äì √âvolution de l'indice de r√©fraction moyen}
+\label{fig:sub24}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424485848_evolution_average_iris_size.jpeg}
+%\caption{c}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424485848_evolution_average_refraction_index.jpeg}
+%\caption{d}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+
+%\subsection{Test 3}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424573992_evolution_average_curve_radius.jpeg}
+\caption{Test 3 ‚Äì √âvolution du rayon de courbure moyen}
+\label{fig:sub31}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424573992_evolution_average_fitness.jpeg}
+\caption{Test 3 ‚Äì √âvolution de la fonction fitness moyenne}
+\label{fig:sub32}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424573992_evolution_average_curve_radius.jpeg}
+%\caption{a}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424573992_evolution_average_fitness.jpeg}
+%\caption{b}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424573992_evolution_average_iris_size.jpeg}
+\caption{Test 3 ‚Äì √âvolution de la taille moyenne de l'iris}
+\label{fig:sub33}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{1487424573992_evolution_average_refraction_index.jpeg}
+\caption{Test 3 ‚Äì √âvolution de l'indice de r√©fraction moyen}
+\label{fig:sub34}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{1487424573992_evolution_average_iris_size.jpeg}
+%\caption{√âvolution de la taille moyenne de l'iris}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=.5\linewidth]{1487424573992_evolution_average_refraction_index.jpeg}
+%\caption{√âvolution de l'indice de r√©fraction moyen}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+Les graphes concernant l'√©volution des rayons de courbure moyens sont semblables entre les 2 tests. Le rayon de courbure minimum est atteint au bout de 20 000 g√©n√©rations (voir Figures \ref{fig:sub11}, \ref{fig:sub21} et \ref{fig:sub31}).\\
+
+Concernant la valeur moyenne de la fonction fitness, on observe que r√©sultats des tests 1 et 2 sont similaires et marquent une diff√©rence avec le test 3. En effet, pour deux premiers tests (voir Figures \ref{fig:sub12} et \ref{fig:sub22}), les courbes sont des courbes en escalier. Quatres et cinq seuils sont visibles. Les seuils interm√©diaires sont les plus marqu√©s. En revanche, pour le troisi√®me test (voir Figure \ref{fig:sub32}), cinq seuils sont √©galement pr√©sents mais les deux plus importants sont le premier (valeur minimale de la fitness moyenne) et le dernier (valeur maximale de la fitness moyenne).\\
+
+Il existe √©galement entre les diff√©rents tests pour la taille moyenne de l'iris. Le test 1 (voir Figure \ref{fig:sub13}) montre une √©volution quasi-lin√©aire de cette valeur. En revanche, on observe (voir Figures \ref{fig:sub23} et \ref{fig:sub33}) une √©volution avec deux paliers fortement distingu√©s pour les tests 2 et 3.\\
+
+Enfin, une autre distinction peut √™tre faite concernant l'indice de r√©fraction moyen. √Ä l'instar de la valeur de la fitness moyenne, les r√©sultats des tests 1 et 2 sont similaires (voir Figures \ref{fig:sub14} et \ref{fig:sub24}) avec un net √©cart entre les deux paliers initiaux et finaux. √Ä l'inverse, l'√©cart entre les paliers obtenus dans le test 3 (voir Figure \ref{fig:sub34}) est beaucoup moins marqu√©.
+
+\subsection{Meilleurs param√®tres}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_angle.jpeg}
+\caption{Evolution de l'angle du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_aperture.jpeg}
+\caption{Evolution de l'ouverture du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_angle.jpeg}
+%\caption{Evolution de l'angle du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_aperture.jpeg}
+%\caption{Evolution de l'ouverture du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_curve_radius.jpeg}
+\caption{Evolution du rayon de courbure du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_depth.jpeg}
+\caption{Evolution de la profondeur du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_curve_radius.jpeg}
+%\caption{Evolution du rayon de courbure du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_depth.jpeg}
+%\caption{Evolution de la profondeur du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_fitness.jpeg}
+\caption{Evolution de la fitness du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_iris_size.jpeg}
+\caption{Evolution de la taille de l'iris du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_fitness.jpeg}
+%\caption{Evolution de la fitness du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_iris_size.jpeg}
+%\caption{Evolution de la taille de l'iris du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+\begin{figure}
+\centering
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_ratio.jpeg}
+\caption{Evolution du ratio du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}%
+\begin{subfigure}{.5\textwidth}
+  \centering
+\includegraphics[width=1\linewidth]{best_eye_refraction_index.jpeg}
+\caption{Evolution de l'indice de r√©fraction du meilleur oeil \\en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{subfigure}
+\caption{}
+\label{fig:test}
+\end{figure}
+
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_ratio.jpeg}
+%\caption{Evolution du ratio du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%\begin{center}
+%\includegraphics[width=12cm]{best_eye_refraction_index.jpeg}
+%\caption{Evolution de l'indice de r√©fraction du meilleur oeil en fonction de la g√©n√©ration}
+%\label{fig:modelisation}
+%\end{center}
+%\end{figure}
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=.5\linewidth]{best_eye_sight_angle.jpeg}
+\caption{Evolution de l'angle de vue du meilleur oeil en fonction de la g√©n√©ration}
+\label{fig:modelisation}
+\end{center}
+\end{figure}
 
 \end{document}
