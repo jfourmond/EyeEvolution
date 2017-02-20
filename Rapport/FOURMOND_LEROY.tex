@@ -28,7 +28,7 @@
 \begin{document}
 
 \title{Compte-rendu de TP \\``Algorithme Génétique''}
-\author{FOURMOND Jérôme \& Stanislas LEROY
+\author{Jérôme FOURMOND \& Stanislas LEROY
 \\ M2 Informatique – Parcours Intelligence Artificielle
 \\Université Claude-Bernard Lyon 1}
 \date{\today}
@@ -136,7 +136,7 @@ Dans le cas présent, avec les paramètres choisis, l'appel au programme via l'a
 	java -jar EyeEvolution.jar 40 50000 50 20
 \end{lstlisting}
 	
-\subsection{Fichier csv}
+\subsection{Fichier CSV}
 
 A l'exécution, le programme produit un fichier au format $csv$ dans le répertoire $resources$ contenant les détails suivants pour chaque génération :
 \begin{itemize}
@@ -380,7 +380,7 @@ Les graphes concernant l'évolution des rayons de courbure moyens sont semblable
 
 Concernant la valeur moyenne de la fonction fitness, on observe que résultats des tests 1 et 2 sont similaires et marquent une différence avec le test 3. En effet, pour deux premiers tests (voir Figures \ref{fig:sub12} et \ref{fig:sub22}), les courbes sont des courbes en escalier. Quatres et cinq seuils sont visibles. Les seuils intermédiaires sont les plus marqués. En revanche, pour le troisième test (voir Figure \ref{fig:sub32}), cinq seuils sont également présents mais les deux plus importants sont le premier (valeur minimale de la fitness moyenne) et le dernier (valeur maximale de la fitness moyenne).\\
 
-Il existe également entre les différents tests pour la taille moyenne de l'iris. Le test 1 (voir Figure \ref{fig:sub13}) montre une évolution quasi-linéaire de cette valeur. En revanche, on observe (voir Figures \ref{fig:sub23} et \ref{fig:sub33}) une évolution avec deux paliers fortement distingués pour les tests 2 et 3.\\
+Il existe également une distinction entre les différents tests pour la taille moyenne de l'iris. Le test 1 (voir Figure \ref{fig:sub13}) montre une évolution quasi-linéaire de cette valeur. En revanche, on observe (voir Figures \ref{fig:sub23} et \ref{fig:sub33}) une évolution avec deux paliers fortement distingués pour les tests 2 et 3.\\
 
 Enfin, une autre distinction peut être faite concernant l'indice de réfraction moyen. À l'instar de la valeur de la fitness moyenne, les résultats des tests 1 et 2 sont similaires (voir Figures \ref{fig:sub14} et \ref{fig:sub24}) avec un net écart entre les deux paliers initiaux et finaux. À l'inverse, l'écart entre les paliers obtenus dans le test 3 (voir Figure \ref{fig:sub34}) est beaucoup moins marqué.
 
@@ -392,13 +392,13 @@ Enfin, une autre distinction peut être faite concernant l'indice de réfraction
   \centering
 \includegraphics[width=1\linewidth]{best_eye_angle.jpeg}
 \caption{Evolution de l'angle du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_1}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
 \includegraphics[width=1\linewidth]{best_eye_aperture.jpeg}
 \caption{Evolution de l'ouverture du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_2}
 \end{subfigure}
 \caption{}
 \label{fig:test}
@@ -426,13 +426,13 @@ Enfin, une autre distinction peut être faite concernant l'indice de réfraction
   \centering
 \includegraphics[width=1\linewidth]{best_eye_curve_radius.jpeg}
 \caption{Evolution du rayon de courbure du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_3}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
 \includegraphics[width=1\linewidth]{best_eye_depth.jpeg}
 \caption{Evolution de la profondeur du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_4}
 \end{subfigure}
 \caption{}
 \label{fig:test}
@@ -460,13 +460,13 @@ Enfin, une autre distinction peut être faite concernant l'indice de réfraction
   \centering
 \includegraphics[width=1\linewidth]{best_eye_fitness.jpeg}
 \caption{Evolution de la fitness du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_5}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
 \includegraphics[width=1\linewidth]{best_eye_iris_size.jpeg}
 \caption{Evolution de la taille de l'iris du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_6}
 \end{subfigure}
 \caption{}
 \label{fig:test}
@@ -494,13 +494,13 @@ Enfin, une autre distinction peut être faite concernant l'indice de réfraction
   \centering
 \includegraphics[width=1\linewidth]{best_eye_ratio.jpeg}
 \caption{Evolution du ratio du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_7}
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
   \centering
 \includegraphics[width=1\linewidth]{best_eye_refraction_index.jpeg}
 \caption{Evolution de l'indice de réfraction du meilleur oeil \\en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_8}
 \end{subfigure}
 \caption{}
 \label{fig:test}
@@ -526,7 +526,7 @@ Enfin, une autre distinction peut être faite concernant l'indice de réfraction
 \begin{center}
 \includegraphics[width=.5\linewidth]{best_eye_sight_angle.jpeg}
 \caption{Evolution de l'angle de vue du meilleur oeil en fonction de la génération}
-\label{fig:modelisation}
+\label{fig:best_9}
 \end{center}
 \end{figure}
 
