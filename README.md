@@ -14,7 +14,7 @@
 - [x] Exécuter à plusieurs reprises l'algorithme avec des graines différents pour le générateur aléatoire
 - [x] Sauvegarder l'évolution des paramètres, des grandeurs et de la fitness en fonction de la génération, pour la moyenne de la population et pour le meilleur individu
 - [x] Visualiser
-- [ ] Rediger le rapport
+- [x] Rediger le rapport
 
 ## Objectif
 
